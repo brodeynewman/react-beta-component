@@ -11,4 +11,14 @@
      */value:function b(){if(a&&"string"!=typeof a.keyCode)throw new Error("[react-beta-component]: options.keyCode must be a valid string");document.addEventListener("keydown",this.handleKeyPress)}/**
      * Disables keydown event from window
      * @returns {void}
-     */},{key:"componentWillUnmount",value:function a(){document.removeEventListener("keydown",this.handleKeyPress)}},{key:"render",value:function c(){var a=this.state.isToggled;return _react.default.createElement(_react.default.Fragment,null,a&&_react.default.createElement(b,this.props))}}]),d}(_react.default.Component))}},_default=withBetaComponent;exports.default=_default;
+     */},{key:"componentWillUnmount",value:function a(){document.removeEventListener("keydown",this.handleKeyPress)}/**
+     * Checks if the user input matches the keyCode.
+     * If true, it will enable the `Beta Component`.
+     *
+     * If the current user input is longer than the key code, just reset the state.
+     * @returns {void|null} - void if key code matches or user typed incorrect pass,
+     * null otherwise
+     */},{key:"render",/**
+     * Render
+     * @returns {React.Component} - the component
+     */value:function c(){var a=this.state.isToggled;return _react.default.createElement(_react.default.Fragment,null,a&&_react.default.createElement(b,this.props))}}]),d}(_react.default.Component))}},_default=withBetaComponent;exports.default=_default;

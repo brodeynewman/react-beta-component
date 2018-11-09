@@ -1,3 +1,12 @@
+/**
+ * The `react-beta-component` file.
+ * Enables a beta component given a particular keyCode
+ *
+ * @file react-beta-component
+ * @since 11-08-2018
+ * @author Brodey Newman
+ */
+
 import React from 'react';
 
 /**
@@ -40,6 +49,14 @@ const withBetaComponent = options => ComposedComponent => (
       document.removeEventListener('keydown', this.handleKeyPress);
     }
 
+    /**
+     * Checks if the user input matches the keyCode.
+     * If true, it will enable the `Beta Component`.
+     *
+     * If the current user input is longer than the key code, just reset the state.
+     * @returns {void|null} - void if key code matches or user typed incorrect pass,
+     * null otherwise
+     */
     maybeEnableBetaComponent = () => {
       const { currentCapture } = this.state;
 
@@ -65,6 +82,11 @@ const withBetaComponent = options => ComposedComponent => (
       return null;
     }
 
+    /**
+     * Starts the timeout and captures user key presses
+     * @param {string} key - the current key pressed
+     * @returns {void}
+     */
     setTimeoutAndCapture = (key) => {
       const { currentCapture } = this.state;
 
@@ -82,11 +104,23 @@ const withBetaComponent = options => ComposedComponent => (
       }, this.maybeEnableBetaComponent);
     }
 
+    /**
+     * Enables `isListening` flag.
+     * @param {string} key - the current key pressed (which is the first key in keyCode).
+     * @returns {void}
+     */
     enableListening = key => this.setState({
       isListening: true,
       currentCapture: [key],
     });
 
+    /**
+     * Checks the first key that is pressed to see if it
+     * matches the first character in the keyCode.
+     * If this is true, we start listening for keyCode matches.
+     * @param {string} key - the current key pressed
+     * @returns {void}
+     */
     handleKeyPress = ({ key }) => {
       const { currentCapture, isListening } = this.state;
 
@@ -101,6 +135,10 @@ const withBetaComponent = options => ComposedComponent => (
       }
     };
 
+    /**
+     * Render
+     * @returns {React.Component} - the component
+     */
     render() {
       const { isToggled } = this.state;
 
