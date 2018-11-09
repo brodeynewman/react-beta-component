@@ -13,4 +13,14 @@ module.exports = {
   plugins: [
     '@babel/plugin-proposal-class-properties',
   ],
+  env: {
+    production: {
+      ignore: [
+        '**/*.test.js',
+      ],
+      presets: [
+        'minify',
+      ],
+    }
+  },
 };

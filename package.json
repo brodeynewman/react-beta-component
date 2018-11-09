@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "build": "NODE_ENV=production BABEL_ENV=production npx babel -d ./dist ./src"
+    "build": "rm -rf dist && NODE_ENV=production BABEL_ENV=production npx babel -d ./dist ./src"
   },
   "author": "@brodeynewman",
   "license": "MIT",
   "dependencies": {
-    "babel-eslint": "^10.0.1",
     "react": "^16.6.1"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "babel-preset-minify": "^0.5.0",
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
