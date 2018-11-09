@@ -18,6 +18,10 @@ const withBetaComponent = options => ComposedComponent => (
       console.log('keypress', key);
     };
 
+    componentWillUnmount() {
+      document.removeEventListener('keydown', this.handleKeyPress);
+    }
+
     render() {
       const { isToggled } = this.state;
 
