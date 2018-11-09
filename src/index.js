@@ -10,6 +10,7 @@ const withBetaComponent = options => ComposedComponent => (
       super(props);
 
       this.state = {
+        isListening: false,
         isToggled: Boolean(options && options.forceEnable),
         currentCapture: [],
       };
@@ -36,18 +37,38 @@ const withBetaComponent = options => ComposedComponent => (
       }
     }
 
-    handleKeyPress = ({ key }) => {
+    setTimeoutAndCapture = (key) => {
       const { currentCapture } = this.state;
 
-      clearTimeout(this.timeout);
-
-      this.setState({ currentCapture: [...currentCapture, key] }, this.maybeEnableBetaComponent);
-
       this.timeout = setTimeout(() => {
-        this.setState({ currentCapture: [] });
+        this.setState({
+          currentCapture: [],
+          isListening: false,
+        });
 
         clearTimeout(this.timeout);
       }, options.keyCodeTimeout || 500);
+
+      this.setState({ currentCapture: [...currentCapture, key] }, this.maybeEnableBetaComponent);
+    }
+
+    enableListening = key => this.setState({
+      isListening: true,
+      currentCapture: [key],
+    });
+
+    handleKeyPress = ({ key }) => {
+      const { currentCapture, isListening } = this.state;
+
+      clearTimeout(this.timeout);
+
+      if (key === options.keyCode[0] && !currentCapture.length) {
+        this.enableListening(key);
+      }
+
+      if (isListening) {
+        this.setTimeoutAndCapture(key);
+      }
     };
 
     render() {
