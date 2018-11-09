@@ -33,3 +33,11 @@ export default withBetaComponent({
 ```
 
 Simply wrap your feature in the `withBetaComponent` HOC and supply the keyCode.
+
+## Options
+
+|  Prop  | Default |  required  | Description |
+:--------|:--------:|:----------:|:------------
+keyCode | | Yes | The key code to enable your component
+keyCodeTimeout | 500 | No | If your code isn't typed within this amount of time (in ms), you will have to restart.
+forceEnable | false  | No | If you want to always render this component. If keyCode is typed while this flag is passed, it will still toggle your component.
