@@ -1,0 +1,22 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "valid-jsdoc": 1,
+    "require-jsdoc": [1,
+      {
+        "require": {
+          "MethodDefinition": true,
+          "ClassDeclaration": true,
+          "FunctionDeclaration": true
+        }
+      }
+    ]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  }
+}

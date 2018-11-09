@@ -1,0 +1,28 @@
+{
+  "name": "react-beta-component",
+  "version": "0.0.0",
+  "description": "A higher order component that allows you to toggle the visibility of a wrapped component by typing a custom konami code.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "build": "NODE_ENV=production BABEL_ENV=production npx babel -d ./dist ./src"
+  },
+  "author": "@brodeynewman",
+  "license": "MIT",
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "react": "^16.6.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1"
+  }
+}
