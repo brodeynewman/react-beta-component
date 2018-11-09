@@ -1,5 +1,9 @@
 import React from 'react';
 
+export function doesKeyCodeMatchState(code, currentCapture) {
+  return code === currentCapture.join('');
+}
+
 const withBetaComponent = options => ComposedComponent => (
   class extends React.Component {
     constructor(props) {
@@ -7,6 +11,7 @@ const withBetaComponent = options => ComposedComponent => (
 
       this.state = {
         isToggled: Boolean(options && options.forceEnable),
+        currentCapture: [],
       };
     }
 
@@ -14,19 +19,42 @@ const withBetaComponent = options => ComposedComponent => (
       document.addEventListener('keydown', this.handleKeyPress);
     }
 
-    handleKeyPress = ({ key }) => {
-      console.log('keypress', key);
-    };
-
     componentWillUnmount() {
       document.removeEventListener('keydown', this.handleKeyPress);
     }
+
+    maybeEnableBetaComponent = () => {
+      const { currentCapture } = this.state;
+
+      const keyCodeMatches = doesKeyCodeMatchState(options.keyCode, currentCapture);
+
+      if (keyCodeMatches) {
+        this.setState(({ isToggled }) => ({
+          isToggled: !isToggled,
+          currentCapture: [],
+        }));
+      }
+    }
+
+    handleKeyPress = ({ key }) => {
+      const { currentCapture } = this.state;
+
+      clearTimeout(this.timeout);
+
+      this.setState({ currentCapture: [...currentCapture, key] }, this.maybeEnableBetaComponent);
+
+      this.timeout = setTimeout(() => {
+        this.setState({ currentCapture: [] });
+
+        clearTimeout(this.timeout);
+      }, options.keyCodeTimeout || 500);
+    };
 
     render() {
       const { isToggled } = this.state;
 
       return (
-        <React.Fragment onKeyPress={this.handleKeyPress}>
+        <React.Fragment>
           {isToggled && <ComposedComponent {...this.props} />}
         </React.Fragment>
       );
