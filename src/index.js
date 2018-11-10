@@ -9,6 +9,8 @@
 
 import React from 'react';
 
+const KEY_CODE_IGNORE = [16];
+
 /**
  * Checks if key code matches the current state
  * @param {string} code - the key code
@@ -87,9 +89,14 @@ const withBetaComponent = options => ComposedComponent => (
     /**
      * Starts the timeout and captures user key presses
      * @param {string} key - the current key pressed
+     * @param {number} keyCode - the key code for the current key
      * @returns {void}
      */
-    setTimeoutAndCapture = (key) => {
+    setTimeoutAndCapture = (key, keyCode) => {
+      if (KEY_CODE_IGNORE.indexOf(keyCode) > -1) {
+        return null;
+      }
+
       const { currentCapture } = this.state;
 
       this.timeout = setTimeout(() => {
@@ -101,7 +108,7 @@ const withBetaComponent = options => ComposedComponent => (
         clearTimeout(this.timeout);
       }, options.keyCodeTimeout || 500);
 
-      this.setState({
+      return this.setState({
         currentCapture: [...currentCapture, key],
       }, this.maybeEnableBetaComponent);
     }
@@ -123,7 +130,7 @@ const withBetaComponent = options => ComposedComponent => (
      * @param {string} key - the current key pressed
      * @returns {void}
      */
-    handleKeyPress = ({ key }) => {
+    handleKeyPress = ({ key, keyCode }) => {
       const { currentCapture, isListening } = this.state;
 
       clearTimeout(this.timeout);
@@ -133,7 +140,7 @@ const withBetaComponent = options => ComposedComponent => (
       }
 
       if (isListening) {
-        this.setTimeoutAndCapture(key);
+        this.setTimeoutAndCapture(key, keyCode);
       }
     };
 
