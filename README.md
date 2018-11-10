@@ -1,6 +1,6 @@
 # react-beta-component
 
-A simple higher order component that enables you to toggle the rendering of a wrapped component based on a custom konami-like code.
+A tiny higher order component that enables you to toggle the rendering of a wrapped component based on a custom konami-like code.
 
 ## Demo
 
