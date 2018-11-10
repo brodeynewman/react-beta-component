@@ -1,6 +1,6 @@
 {
   "name": "react-beta-component",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A higher order component that allows you to toggle the visibility of a wrapped component by typing a custom konami code.",
   "main": "index.js",
   "scripts": {
