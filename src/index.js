@@ -38,7 +38,9 @@ const withBetaComponent = options => ComposedComponent => (
         throw new Error('[react-beta-component]: options.keyCode must be a valid string');
       }
 
-      document.addEventListener('keydown', this.handleKeyPress);
+      if (options && options.keyCode) {
+        document.addEventListener('keydown', this.handleKeyPress);
+      }
     }
 
     /**

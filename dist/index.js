@@ -8,7 +8,7 @@
      * If a valid keycode exists, it will enable keydown listener.
      * Else, it will throw an error.
      * @returns {void} -
-     */value:function b(){if(a&&"string"!=typeof a.keyCode)throw new Error("[react-beta-component]: options.keyCode must be a valid string");document.addEventListener("keydown",this.handleKeyPress)}/**
+     */value:function b(){if(a&&"string"!=typeof a.keyCode)throw new Error("[react-beta-component]: options.keyCode must be a valid string");a&&a.keyCode&&document.addEventListener("keydown",this.handleKeyPress)}/**
      * Disables keydown event from window
      * @returns {void}
      */},{key:"componentWillUnmount",value:function a(){document.removeEventListener("keydown",this.handleKeyPress)}/**
