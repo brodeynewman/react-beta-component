@@ -9,7 +9,12 @@
 
 import React from 'react';
 
-const KEY_CODE_IGNORE = [16];
+/**
+ * Key codes to ignore
+ */
+const KEY_CODE_IGNORE = {
+  16: true,
+};
 
 /**
  * Checks if key code matches the current state
@@ -92,11 +97,7 @@ const withBetaComponent = options => ComposedComponent => (
      * @param {number} keyCode - the key code for the current key
      * @returns {void}
      */
-    setTimeoutAndCapture = (key, keyCode) => {
-      if (KEY_CODE_IGNORE.indexOf(keyCode) > -1) {
-        return null;
-      }
-
+    setTimeoutAndCapture = (key) => {
       const { currentCapture } = this.state;
 
       this.timeout = setTimeout(() => {
@@ -139,8 +140,8 @@ const withBetaComponent = options => ComposedComponent => (
         this.enableListening(key);
       }
 
-      if (isListening) {
-        this.setTimeoutAndCapture(key, keyCode);
+      if (isListening && !KEY_CODE_IGNORE[keyCode]) {
+        this.setTimeoutAndCapture(key);
       }
     };
 
