@@ -2,6 +2,12 @@
 
 A simple higher order component that enables you to toggle the rendering of a wrapped component based on a custom konami-like code.
 
+## Demo
+
+Try it out!
+
+[![Edit 98yzx39wwp](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/98yzx39wwp)
+
 ## Why?
 
 Maybe you need a feature to be in production but behind some type of beta flag?
