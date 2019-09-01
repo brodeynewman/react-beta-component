@@ -1,12 +1,14 @@
 {
   "name": "react-beta-component",
-  "version": "0.2.2",
+  "version": "0.3.0-canary.0.0.1",
   "description": "A higher order component that allows you to toggle the visibility of a wrapped component by typing a custom konami code.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "NODE_ENV=test jest",
     "test:clear": "jest --clearCache",
-    "build": "rm -rf dist && NODE_ENV=production BABEL_ENV=production npx babel -d ./dist ./src"
+    "lint": "npx eslint ./src",
+    "build": "rm -rf dist && NODE_ENV=production BABEL_ENV=production npx babel -d ./dist ./src",
+    "prepare": "npm run build"
   },
   "author": "@brodeynewman",
   "license": "MIT",
@@ -17,6 +19,7 @@
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",

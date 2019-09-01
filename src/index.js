@@ -28,6 +28,16 @@ export function doesKeyCodeMatchState(code, currentCapture) {
 
 const withBetaComponent = options => ComposedComponent => (
   class extends React.Component {
+    /**
+     * Forwarding initial props
+     * @returns {Object} - initialProps
+     */
+    static getIntialProps = (...args) => (
+      ComposedComponent.getInitialProps
+        ? ComposedComponent.getInitialProps(...args)
+        : {}
+    );
+
     state = {
       isListening: false,
       isToggled: Boolean(options && options.forceEnable),
